@@ -1,0 +1,5 @@
+#!/bin/sh -
+
+cd "$(dirname "$0")"
+
+cut -d '/' -f 2 "$@" > china_domains.txt
