@@ -1,8 +1,12 @@
 #!/usr/bin/env php
 <?php
-    $size = count($argv);
+    $optind = null;
+    $options = getopt("t", [], $optind);
+    $pos_args = array_slice($argv, $optind);
 
-    if ($size === 1) {
+    $size = count($pos_args);
+
+    if ($size === 0) {
         fwrite(STDERR, "Required at least 1 argument!\n");
         exit(1);
     }
@@ -13,9 +17,9 @@
 
         if (strpos($domain, '.') === false) continue;
 
-        for ($i = 1; $i < $size; ++$i) {
+        for ($i = 0; $i < $size; ++$i) {
 ?>
-server=/<?php echo $domain; ?>/<?php echo $argv[$i], "\n" ?>
+server=/<?php echo $domain; ?>/<?php echo $pos_args[$i], "\n" ?>
 <?php
         }
     }
